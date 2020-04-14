@@ -4,9 +4,9 @@ namespace MyRestaurant.Data.Models
     using System;
     using System.Collections.Generic;
 
-    using MyRestaurant.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+
+    using MyRestaurant.Data.Common.Models;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
