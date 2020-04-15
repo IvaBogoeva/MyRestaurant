@@ -2,32 +2,24 @@
 {
     using System.Diagnostics;
 
-    using MyRestaurant.Web.ViewModels;
-
     using Microsoft.AspNetCore.Mvc;
-    using MyRestaurant.Data;
-    using MyRestaurant.Web.ViewModels.Administration.Dashboard;
-    using System.Linq;
+    using MyRestaurant.Services.Data;
+    using MyRestaurant.Web.ViewModels;
     using MyRestaurant.Web.ViewModels.Home;
 
     public class HomeController : BaseController
     {
-        private readonly ApplicationDbContext db;
+        private readonly ICategoriesService categoriesService;
 
-        public HomeController(ApplicationDbContext db)
+        public HomeController(ICategoriesService categoriesService)
         {
-            this.db = db;
+            this.categoriesService = categoriesService;
         }
 
         public IActionResult Index()
         {
-            var viewModel = new ViewModels.Home.IndexViewModel();
-            var categories = this.db.Categories.Select(x => new IndexCategoryViewModel
-            {
-                Name = x.Name,
-                ImageUrl = x.ImageUrl,
-            }).ToList();
-
+            var viewModel = new IndexViewModel();
+            var categories = this.categoriesService.GetAll<IndexCategoryViewModel>();
             viewModel.Categories = categories;
 
             return this.View(viewModel);
