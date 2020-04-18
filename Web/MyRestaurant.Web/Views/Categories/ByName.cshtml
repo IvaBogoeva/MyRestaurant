@@ -1,0 +1,20 @@
+﻿@model MyRestaurant.Web.ViewModels.Categories.CategoryViewModel
+@{
+    this.ViewData["Title"] = Model.Name;
+    var i = 1;
+}
+
+<h1 class="display-5">@Model.Name</h1>
+<hr />
+@foreach (var product in Model.Products)
+{
+    <div class="box-shadow">
+        <h2>@i.@product.Name</h2>
+        <hr />
+        <p>@Html.Raw(@product.Description)</p>
+        <p>Weight  @product.Weight</p>
+        <p>Price  @product.Price $</p>
+        <hr />
+    </div>
+    i++;
+}
